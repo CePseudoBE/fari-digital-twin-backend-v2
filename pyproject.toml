@@ -15,6 +15,7 @@ dependencies = [
     "pyproj",
     "shapely",
     "beautifulsoup4",
+    "numpy",
 ]
 
 [build-system]
