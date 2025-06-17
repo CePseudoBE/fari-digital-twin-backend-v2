@@ -20,7 +20,7 @@ from sources.tec import TECGTFSStaticCollector, TECGTFSRealtimeCollector
 from sources.telraam import TelraamTrafficCollector
 
 from assets_manager.assets_manager import AssetsManager, TilesetManager, PointCloudManager, WMSCollecor
-
+from digitaltwin_dataspace import run_components
     
 run_components([
     AssetsManager(),
