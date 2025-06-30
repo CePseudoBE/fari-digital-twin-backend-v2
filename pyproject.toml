@@ -16,8 +16,15 @@ dependencies = [
     "shapely",
     "beautifulsoup4",
     "numpy",
+    "digitaltwin-dataspace",
 ]
 
 [build-system]
 requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta" 
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["sources", "assets_manager"]
+
+[tool.uv.sources]
+digitaltwin-dataspace = { path = "../digitaltwin_dataspace" }

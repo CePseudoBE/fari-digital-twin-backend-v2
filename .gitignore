@@ -3,3 +3,5 @@ data/
 *.db
 __pycache__/
 .venv
+*.egg-info
+uv.lock

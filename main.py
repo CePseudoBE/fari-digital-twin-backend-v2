@@ -1,66 +1,38 @@
+import importlib
+import inspect
+import os
+import pkgutil
+from digitaltwin_dataspace import Collector, Harvester, Handler, run_components
 import dotenv
 dotenv.load_dotenv()
 
-from sources.bolt import BoltGeofenceCollector, BoltVehiclePositionCollector, BoltVehicleTypeCollector
-from sources.brussels_mobility import BrusselsMobilityBikeCountersCollector, BrusselsMobilityBikeCountsCollector, BrusselsMobilityTrafficDevicesCollector
-from sources.de_lijn import DeLijnGTFSStaticCollector, DeLijnGTFSRealtimeCollector
-from sources.dott import DottGeofenceCollector, DottVehiclePositionCollector, DottVehicleTypeCollector
-from sources.energy import EnergyCollector
-from sources.fixmystreet import FixMyStreetIncidentsCollector, FixMyStreetHistoryHarvester
-from sources.infrabel import InfrabelLineSectionCollector, InfrabelOperationalPointsCollector, InfrabelPunctualityCollector, InfrabelSegmentsCollector
-from sources.irceline import IrcelineSOSCollector
-from sources.lime import LimeVehiclePositionCollector, LimeVehicleTypeCollector
-from sources.opensky import OpenSkyCollector
-from sources.pony import PonyGeofenceCollector, PonyVehiclePositionCollector, PonyVehicleTypeCollector
-from sources.sensor_community import SensorCommunityCollector
-from sources.sibelga import SibelgaCollector
-from sources.sncb import SNCBGTFSStaticCollector, SNCBGTFSRealtimeCollector
-from sources.stib import STIBGTFSCollector, STIBShapeFilesCollector, STIBVehiclePositionsCollector, STIBStopsCollector
-from sources.tec import TECGTFSStaticCollector, TECGTFSRealtimeCollector
-from sources.telraam import TelraamTrafficCollector
-
 from assets_manager.assets_manager import AssetsManager, TilesetManager, PointCloudManager, WMSCollecor
-from digitaltwin_dataspace import run_components
-    
+
+SOURCE_PACKAGE = "sources"
+
+def discover_classes_from_package(package: str, base_class):
+    components = []
+    package_path = os.path.join(os.path.dirname(__file__), package.replace('.', '/'))
+
+    for finder, name, ispkg in pkgutil.iter_modules([package_path]):
+        module_name = f"{package}.{name}"
+        module = importlib.import_module(module_name)
+
+        for member_name, obj in inspect.getmembers(module):
+            if inspect.isclass(obj) and issubclass(obj, base_class) and obj not in (base_class,):
+                components.append(obj())
+    return components
+
+collectors = discover_classes_from_package(SOURCE_PACKAGE, Collector)
+harvesters = discover_classes_from_package(SOURCE_PACKAGE, Harvester)
+handlers = discover_classes_from_package(SOURCE_PACKAGE, Handler)
+
 run_components([
+    *collectors,
+    *harvesters,
+    *handlers,
     AssetsManager(),
     TilesetManager(),
     PointCloudManager(),
     WMSCollecor(),
-    BoltGeofenceCollector(),
-    BoltVehiclePositionCollector(),
-    BoltVehicleTypeCollector(),
-    BrusselsMobilityBikeCountersCollector(),
-    BrusselsMobilityBikeCountsCollector(),
-    BrusselsMobilityTrafficDevicesCollector(),
-    DeLijnGTFSStaticCollector(),
-    DeLijnGTFSRealtimeCollector(),
-    DottGeofenceCollector(),
-    DottVehiclePositionCollector(),
-    DottVehicleTypeCollector(),
-    EnergyCollector(),
-    FixMyStreetIncidentsCollector(),
-    FixMyStreetHistoryHarvester(),
-    InfrabelLineSectionCollector(),
-    InfrabelOperationalPointsCollector(),
-    InfrabelPunctualityCollector(),
-    InfrabelSegmentsCollector(),
-    IrcelineSOSCollector(),
-    LimeVehiclePositionCollector(),
-    LimeVehicleTypeCollector(),
-    OpenSkyCollector(),
-    PonyGeofenceCollector(),
-    PonyVehiclePositionCollector(),
-    PonyVehicleTypeCollector(),
-    SensorCommunityCollector(),
-    SibelgaCollector(),
-    SNCBGTFSStaticCollector(),
-    SNCBGTFSRealtimeCollector(),
-    STIBGTFSCollector(),
-    STIBShapeFilesCollector(),
-    STIBVehiclePositionsCollector(),
-    STIBStopsCollector(),
-    TECGTFSStaticCollector(),
-    TECGTFSRealtimeCollector(),
-    TelraamTrafficCollector(),
 ])
