@@ -17,7 +17,7 @@ from digitaltwin_dataspace import run_components, Collector, ComponentConfigurat
 
 class STIBGTFSCollector(Collector):
     def get_schedule(self) -> str:
-        return "1h"
+        return "1s"
 
     def get_configuration(self) -> ComponentConfiguration:
         return ComponentConfiguration(
@@ -80,11 +80,11 @@ class STIBVehiclePositionsCollector(Collector):
         results = []
 
         for raw_result in raw_results:
-            fields = raw_result.get("fields", {})
             try:
-                vehicle_positions = json.loads(fields.get("vehiclepositions", "[]"))
+                vehicle_positions = json.loads(raw_result.get("vehiclepositions", "[]"))
+                line_id = str(raw_result.get("lineid", ""))
                 for vp in vehicle_positions:
-                    results.append({**vp, "lineId": str(fields.get("lineid", ""))})
+                    results.append({**vp, "lineId": line_id})
             except json.JSONDecodeError:
                 continue
 
@@ -183,5 +183,3 @@ class STIBStopsCollector(Collector):
 
     def _convert_stop_ids_to_generic(self, stop_ids):
         return stop_ids.astype(str).str.replace(r'[^0-9]', '', regex=True)
-
-
