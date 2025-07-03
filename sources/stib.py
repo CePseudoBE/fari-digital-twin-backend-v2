@@ -116,10 +116,7 @@ class STIBStopsCollector(Collector):
         stops_per_line["stop_id"] = self._convert_stop_ids_to_generic(stops_per_line["stop_id"])
         stops_per_line = stops_per_line[["stop_id", "stop_lat", "stop_lon"]]
 
-        unofficial_stops = self._fetch_stops_by_scraping()
-
-        merged = unofficial_stops.merge(stops_per_line, on=["stop_id"], how="left")
-        merged = merged.drop_duplicates(subset=["stop_id", "route_short_name", "direction_id"], keep="first")
+        merged = stops_per_line.drop_duplicates(subset=["stop_id"], keep="first")
         with_coords = merged[merged["stop_lat"].notnull() & merged["stop_lon"].notnull()]
 
         if with_coords.empty:
@@ -135,51 +132,6 @@ class STIBStopsCollector(Collector):
         )
 
         return gdf.to_json().encode('utf-8')
-
-    def _fetch_stops_by_scraping(self) -> pd.DataFrame:
-        stops_data = []
-        direction_choice = ("V", "F")
-        noctis = ["N04", "N05", "N06", "N08", "N09", "N10", "N11", "N12", "N13", "N16", "N18"]
-
-        for line, direction in product(chain(range(1, 100), noctis), direction_choice):
-            try:
-                url = (
-                    f"https://www.stib-mivb.be/irj/servlet/prt/portal/prtroot/"
-                    f"pcd!3aportal_content!2fSTIBMIVB!2fWebsite!2fFrontend!2fPublic!2f"
-                    f"iViews!2fcom.stib.HorairesServletService"
-                    f"?l=fr&_line={line}&_directioncode={direction}&_mode=rt"
-                )
-
-                response = requests.get(url, timeout=10)
-                if response.status_code != 200:
-                    continue
-
-                soup = BeautifulSoup(response.content, "html.parser")
-                li_elements = soup.find_all("li", class_="thermometer__stop")
-
-                for sequence, li in enumerate(li_elements):
-                    stop_id = li.get("id")
-                    stop_name = li.text.replace("\n", "").strip()
-
-                    if stop_id and stop_name:
-                        stops_data.append({
-                            "route_short_name": str(line).replace("T", ""),
-                            "direction_id": direction,
-                            "direction": 0 if direction == "V" else 1,
-                            "stop_id": stop_id,
-                            "stop_name": stop_name,
-                            "stop_sequence": sequence,
-                        })
-
-            except Exception as e:
-                print(f"Erreur scraping ligne {line} direction {direction}: {e}")
-                continue
-
-        df = pd.DataFrame(stops_data)
-        if not df.empty:
-            df["stop_id"] = self._convert_stop_ids_to_generic(df["stop_id"])
-
-        return df
 
     def _convert_stop_ids_to_generic(self, stop_ids):
         return stop_ids.astype(str).str.replace(r'[^0-9]', '', regex=True)

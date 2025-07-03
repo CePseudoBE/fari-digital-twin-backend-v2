@@ -26,8 +26,6 @@ from assets_manager.assets_manager import AssetsManager, TilesetManager, PointCl
 from digitaltwin_dataspace import run_components
 
 run_components([
-    #DeLijnGTFSStaticCollector(), take a while, need to wait
-    #DeLijnGTFSRealtimeCollector(), don't send zip but only no xtension file
     #FixMyStreetHistoryHarvester(), bug from package
-    #STIBStopsCollector(), scraping ? https://www.stib-mivb.be/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fSTIBMIVB!2fWebsite!2fFrontend!2fPublic!2fiViews!2fcom.stib.HorairesServletService?l=fr&_line=92&_directioncode=F&_mode=rt
+    STIBStopsCollector(),
 ])
