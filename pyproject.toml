@@ -24,10 +24,10 @@ dependencies = [
 
 [build-system]
 requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta" 
+build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-py-modules = []
+[tool.setuptools.packages.find]
+include = ["sources", "assets_manager"]
 
 [tool.uv.sources]
-digitaltwin-dataspace = { path = "../digitaltwin_dataspace", editable = true }
+digitaltwin-dataspace = { path = "../digitaltwin_dataspace" }
