@@ -7,7 +7,7 @@ dotenv.load_dotenv()
 from digitaltwin_dataspace import Collector, Harvester, Handler, run_components
 
 
-from assets_manager.assets_manager import AssetsManager, TilesetManager, PointCloudManager, WMSCollecor
+from assets_manager.assets_manager import AssetsManager, TilesetManager, PointCloudManager, WMSCollecor, DigitalTerrainManager
 
 SOURCE_PACKAGE = "sources"
 
@@ -36,4 +36,5 @@ run_components([
     TilesetManager(),
     PointCloudManager(),
     WMSCollecor(),
+    DigitalTerrainManager(),
 ])
