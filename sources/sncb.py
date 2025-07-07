@@ -7,7 +7,7 @@ from digitaltwin_dataspace import Collector, ComponentConfiguration, run_compone
 
 class SNCBGTFSStaticCollector(Collector):
     def get_schedule(self) -> str:
-        return "10s"  # Collecte toutes les 10 secondes
+        return "10m"  # Collecte toutes les 10 secondes
     
     def get_configuration(self) -> ComponentConfiguration:
         return ComponentConfiguration(
