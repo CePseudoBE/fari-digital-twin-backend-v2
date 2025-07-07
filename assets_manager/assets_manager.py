@@ -27,7 +27,7 @@ class TilesetManager(TilesetManager):
             content_type="application/json",
         )
 
-class DigitalTerrainManager(AssetsManager):
+class DigitalTerrainManager(TilesetManager):
     def get_configuration(self) -> ComponentConfiguration:
         return ComponentConfiguration(
             name="digital_terrain_manager",
