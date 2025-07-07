@@ -26,6 +26,15 @@ class TilesetManager(TilesetManager):
             description="Manages tilesets",
             content_type="application/json",
         )
+
+class DigitalTerrainManager(AssetsManager):
+    def get_configuration(self) -> ComponentConfiguration:
+        return ComponentConfiguration(
+            name="digital_terrain_manager",
+            tags=["DigitalTerrain"],
+            description="Manages digital terrain",
+            content_type="application/json",
+        )
     
 class WMSCollecor(Collector): 
     def __init__(self):
