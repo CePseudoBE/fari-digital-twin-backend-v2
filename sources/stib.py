@@ -93,7 +93,7 @@ class STIBVehiclePositionsCollector(Collector):
 
 class STIBStopsCollector(Collector):
     def get_schedule(self) -> str:
-        return "10s"
+        return "2m"
 
     def get_configuration(self) -> ComponentConfiguration:
         return ComponentConfiguration(

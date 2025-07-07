@@ -17,6 +17,9 @@ dependencies = [
     "beautifulsoup4",
     "numpy",
     "digitaltwin-dataspace",
+    "psycopg2-binary>=2.9.10",
+    "boto3>=1.38.39",
+    "python-multipart>=0.0.20",
 ]
 
 [build-system]

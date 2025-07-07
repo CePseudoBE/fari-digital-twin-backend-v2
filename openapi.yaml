@@ -82,7 +82,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/BoltVehicleTypeCollectorResponse"
 
-  # Brussels Mobility Collectors
   /brussels-mobility-bike-counters-collector/:
     get:
       summary: List of bike counters
@@ -119,7 +118,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/BrusselsMobilityTrafficDevicesFeatureCollection"
 
-  # De Lijn Transit
   /delijn-gtfs-static-collector/:
     get:
       summary: Get De Lijn GTFS static feed (ZIP)
@@ -146,8 +144,30 @@ paths:
                 type: string
                 format: binary
 
+  /dott-goefence-collector/:
+    get:
+      summary: Collect the Dott geofencing zones in Brussels
+      tags: [Geofence - Dott]
+      responses:
+        "200":
+          description: Collector status
 
-  # Energy Collector
+  /dott-vehicle-position-collector/:
+    get:
+      summary: Collect the Dott positions in Brussels
+      tags: [Vehicle position - Dott]
+      responses:
+        "200":
+          description: Collector status
+
+  /dott-vehicle-type-collector/:
+    get:
+      summary: Collect the Dott vehicle types
+      tags: [Vehicle type - Dott]
+      responses:
+        "200":
+          description: Collector status
+
   /energy-collector/:
     get:
       summary: Get energy collector status
@@ -160,7 +180,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/EnergyConsumptionFeatureCollection"
 
-  # FixMyStreet Collector
   /fixmystreet-collector/:
     get:
       summary: Get FixMyStreet GeoJSON reports
@@ -185,18 +204,37 @@ paths:
               schema:
                 $ref: "#/components/schemas/FixMyStreetHistoryFeatureCollection"
 
-
-  /opensky-collector/:
+  /infrabel-line-section-collector/:
     get:
-      summary: Get OpenSky aircraft positions (GeoJSON)
-      tags: [ Aviation ]
+      summary: Collect the line sections of the Infrabel network (GeoJSON)
+      tags: [ Line section - Infrabel ]
       responses:
         "200":
-          description: Live aircraft position data from OpenSky
-          content:
-            application/geo+json:
-              schema:
-                $ref: "#/components/schemas/OpenSkyFeatureCollection"
+          description: Collector status
+
+  /infrabel-operational-points-collector/:
+    get:
+      summary: Collect the operational points of the Infrabel network (GeoJSON)
+      tags: [ Operational points - Infrabel ]
+      responses:
+        "200":
+          description: Collector status
+
+  /infrabel-punctuality-collector/:
+    get:
+      summary: Collect the D-1 punctuality data of the Infrabel network (JSON).
+      tags: [ Punctuality - Infrabel ]
+      responses:
+        "200":
+          description: Collector status
+
+  /infrabel-segments-collector/:
+    get:
+      summary: Collect the segments data of the Infrabel network (JSON).
+      tags: [ Segments - Infrabel ]
+      responses:
+        "200":
+          description: Collector status
 
 
   # Environmental Data
@@ -212,6 +250,57 @@ paths:
               schema:
                 $ref: "#/components/schemas/AirQualityFeatureCollection"
 
+  /lime-vehicle-position-collector/:
+    get:
+      summary: Collect the positions of Lime vehicles in Brussels.
+      tags: [ Vehicle position - Lime ]
+      responses:
+        "200":
+          description: Collector status
+
+  /lime-vehicle-type-collector/:
+    get:
+      summary: Collect the type of Lime vehicles in Brussels.
+      tags: [ Vehicle type - Lime ]
+      responses:
+        "200":
+          description: Collector status
+
+  /opensky-collector/:
+    get:
+      summary: Get OpenSky aircraft positions (GeoJSON)
+      tags: [ Aviation ]
+      responses:
+        "200":
+          description: Live aircraft position data from OpenSky
+          content:
+            application/geo+json:
+              schema:
+                $ref: "#/components/schemas/OpenSkyFeatureCollection"
+  /pony-geofence-collector/:
+    get:
+      summary: Collect the geofencing zones of Pony in Brussels
+      tags: [ Geofence - Pony ]
+      responses:
+        "200":
+          description: Collector status
+
+  /pony-vehicle-position-collector/:
+    get:
+      summary: Collect the positions of Pony vehicles in Brussels.
+      tags: [ Vehicle position - Pony ]
+      responses:
+        "200":
+          description: Collector status
+
+  /pony-vehicle-type-collector/:
+    get:
+      summary: Collect the type of Pony vehicles in Brussels.
+      tags: [ Vehicle type - Pony ]
+      responses:
+        "200":
+          description: Collector status
+
   /sensor-community-collector/:
     get:
       summary: Get sensor community collector data
@@ -223,6 +312,103 @@ paths:
             application/geo+json:
               schema:
                 $ref: "#/components/schemas/SensorCommunityFeatureCollection"
+
+  /sibelga-collector/:
+    get:
+      summary: Collects data from Sibelga APIs
+      tags: [ Sigelta ]
+      responses:
+        "200":
+          description: Collector status
+
+  /sncb-gtfs-static-collector/:
+    get:
+      summary: Collect the static GTFS data from SNCB.
+      tags: [ Static GTFS - SNCB ]
+      responses:
+        "200":
+          description: Collector status
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /sncb-gtfs-realtime-collector/:
+    get:
+      summary: Collect the realtime GTFS data from SNCB.
+      tags: [ Realtime GTFS - SNCB ]
+      responses:
+        "200":
+          description: Collector status
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /stib-gtfs-collector/:
+    get:
+      summary: Collect the static GTFS data from STIB.
+      tags: [ Static GTFS - STIB ]
+      responses:
+        "200":
+          description: Collector status
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /stib-shapefiles-collector/:
+    get:
+      summary: Collect the shapefiles data from STIB.
+      tags: [ Shapefiles - STIB ]
+      responses:
+        "200":
+          description: Collector status
+
+  /stib-vehicle-position-collector/:
+    get:
+      summary: Collect the positions of STIB vehicles in Brussels.
+      tags: [ Vehicle position - STIB ]
+      responses:
+        "200":
+          description: Collector status
+
+  /stib-stops-collector/:
+    get:
+      summary: Collect the stops of STIB in Brussels.
+      tags: [ Stops - STIB ]
+      responses:
+        "200":
+          description: Collector status
+
+  /tec-gtfs-static-collector/:
+    get:
+      summary: Collect the static GTFS data from TEC.
+      tags: [ Static GTFS - TEC ]
+      responses:
+        "200":
+          description: Collector status
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /tec-gtfs-realtime-collector/:
+    get:
+      summary: Collect the realtime GTFS data from TEC.
+      tags: [ Realtime GTFS - TEC ]
+      responses:
+        "200":
+          description: Collector status
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
 
   # Traffic Data
   /telraam-traffic-collector/:
@@ -1004,7 +1190,7 @@ components:
               maxItems: 3
               items:
                 type: number
-              description: [ longitude, latitude, altitude (m) ]
+              description: '[ longitude, latitude, altitude (m) ]'
         properties:
           type: object
           required:
