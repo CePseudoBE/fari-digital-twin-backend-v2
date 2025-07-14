@@ -147,7 +147,7 @@ paths:
   /dott-goefence-collector/:
     get:
       summary: Collect the Dott geofencing zones in Brussels
-      tags: [Geofence - Dott]
+      tags: [ Mobility - Dott ]
       responses:
         "200":
           description: List of active Dott geofencing zones in Brussels
@@ -159,7 +159,7 @@ paths:
   /dott-vehicle-position-collector/:
     get:
       summary: Collect the Dott positions in Brussels
-      tags: [Vehicle position - Dott]
+      tags: [ Mobility - Dott ]
       responses:
         "200":
           description: Latest GPS positions of Dott vehicles in Brussels
@@ -171,7 +171,7 @@ paths:
   /dott-vehicle-type-collector/:
     get:
       summary: Collect the Dott vehicle types
-      tags: [Vehicle type - Dott]
+      tags: [ Mobility - Dott ]
       responses:
         "200":
           description: Metadata describing Dott vehicle types
@@ -183,7 +183,7 @@ paths:
   /energy-collector/:
     get:
       summary: Get energy collector status
-      tags: [Energy]
+      tags: [ Energy ]
       responses:
         "200":
           description: List of monitored energy consumption points with historical values
@@ -244,7 +244,7 @@ paths:
   /infrabel-punctuality-collector/:
     get:
       summary: Collect the D-1 punctuality data of the Infrabel network (JSON)
-      tags: [ Punctuality - Infrabel ]
+      tags: [ Rail - Infrabel ]
       responses:
         "200":
           description: List of punctuality records for trains (D-1)
@@ -256,7 +256,7 @@ paths:
   /infrabel-segments-collector/:
     get:
       summary: Collect the segments data of the Infrabel network (JSON).
-      tags: [ Segments - Infrabel ]
+      tags: [ Rail - Infrabel ]
       responses:
         "200":
           description: GeoJSON FeatureCollection of rail segments
@@ -281,7 +281,7 @@ paths:
   /lime-vehicle-position-collector/:
     get:
       summary: Collect the positions of Lime vehicles in Brussels.
-      tags: [ Vehicle position - Lime ]
+      tags: [ Mobility - Lime ]
       responses:
         "200":
           description: List of Lime vehicle positions (GeoJSON)
@@ -293,7 +293,7 @@ paths:
   /lime-vehicle-type-collector/:
     get:
       summary: Collect the type of Lime vehicles in Brussels.
-      tags: [ Vehicle type - Lime ]
+      tags: [ Mobility - Lime ]
       responses:
         "200":
           description: List of Lime vehicle types
@@ -317,7 +317,7 @@ paths:
   /pony-geofence-collector/:
     get:
       summary: Collect the geofencing zones of Pony in Brussels
-      tags: [ Geofence - Pony ]
+      tags: [ Mobility - Pony ]
       responses:
         "200":
           description: GeoJSON FeatureCollection of Pony geofencing zones
@@ -329,7 +329,7 @@ paths:
   /pony-vehicle-position-collector/:
     get:
       summary: Collect the positions of Pony vehicles in Brussels.
-      tags: [ Vehicle position - Pony ]
+      tags: [ Mobility - Pony ]
       responses:
         "200":
           description: GeoJSON FeatureCollection of Pony vehicle positions
@@ -341,7 +341,7 @@ paths:
   /pony-vehicle-type-collector/:
     get:
       summary: Collect the type of Pony vehicles in Brussels.
-      tags: [ Vehicle type - Pony ]
+      tags: [ Mobility - Pony ]
       responses:
         "200":
           description: List of Pony vehicle types
@@ -365,7 +365,7 @@ paths:
   /sibelga-collector/:
     get:
       summary: Collects data from Sibelga APIs
-      tags: [ Sigelta ]
+      tags: [ Utilities ]
       responses:
         "200":
           description: GeoJSON FeatureCollection of Sibelga chantier data
@@ -377,7 +377,7 @@ paths:
   /sncb-gtfs-static-collector/:
     get:
       summary: Collect the static GTFS data from SNCB.
-      tags: [ Static GTFS - SNCB ]
+      tags: [ Transit - SNCB ]
       responses:
         "200":
           description: Downloadable GTFS static feed from SNCB
@@ -390,7 +390,7 @@ paths:
   /sncb-gtfs-realtime-collector/:
     get:
       summary: Collect the realtime GTFS data from SNCB.
-      tags: [ Realtime GTFS - SNCB ]
+      tags: [ Transit - SNCB ]
       responses:
         "200":
           description: Downloadable GTFS realtime feed from SNCB
@@ -403,7 +403,7 @@ paths:
   /stib-gtfs-collector/:
     get:
       summary: Collect the static GTFS data from STIB.
-      tags: [ Static GTFS - STIB ]
+      tags: [ Transit - STIB ]
       responses:
         "200":
           description: Downloadable GTFS static feed from STIB
@@ -416,7 +416,7 @@ paths:
   /stib-shapefiles-collector/:
     get:
       summary: Collect the shapefiles data from STIB.
-      tags: [ Shapefiles - STIB ]
+      tags: [ Transit - STIB ]
       responses:
         "200":
           description: GeoJSON LineString shapefiles for STIB lines
@@ -428,7 +428,7 @@ paths:
   /stib-vehicle-position-collector/:
     get:
       summary: Collect the positions of STIB vehicles in Brussels.
-      tags: [ Vehicle position - STIB ]
+      tags: [ Transit - STIB ]
       responses:
         "200":
           description: List of vehicle positions for STIB vehicles
@@ -440,7 +440,7 @@ paths:
   /stib-stops-collector/:
     get:
       summary: Collect the stops of STIB in Brussels.
-      tags: [ Stops - STIB ]
+      tags: [ Transit - STIB ]
       responses:
         "200":
           description: List of STIB stops (GeoJSON)
@@ -452,7 +452,7 @@ paths:
   /tec-gtfs-static-collector/:
     get:
       summary: Collect the static GTFS data from TEC.
-      tags: [ Static GTFS - TEC ]
+      tags: [ Transit - TEC ]
       responses:
         "200":
           description: Downloadable GTFS static feed from TEC
@@ -465,7 +465,7 @@ paths:
   /tec-gtfs-realtime-collector/:
     get:
       summary: Collect the realtime GTFS data from TEC.
-      tags: [ Realtime GTFS - TEC ]
+      tags: [ Transit - TEC ]
       responses:
         "200":
           description: Downloadable GTFS realtime feed from TEC
